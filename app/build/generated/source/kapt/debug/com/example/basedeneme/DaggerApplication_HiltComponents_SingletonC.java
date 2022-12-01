@@ -7,6 +7,17 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
+import com.example.basedeneme.di.NetworkModule;
+import com.example.basedeneme.di.NetworkModule_GetRetrofitServiceInstanceFactory;
+import com.example.basedeneme.di.NetworkModule_ProvideRetrofitFactory;
+import com.example.basedeneme.di.NetworkModule_ProvidesHttpLoggingInterceptorFactory;
+import com.example.basedeneme.di.NetworkModule_ProvidesOkHttpClientFactory;
+import com.example.basedeneme.repository.UserRepository;
+import com.example.basedeneme.services.Api;
+import com.example.basedeneme.services.ApiImpl;
+import com.example.basedeneme.ui.mainActivity.MainActivity;
+import com.example.basedeneme.ui.userFragment.UserFragmentViewModel;
+import com.example.basedeneme.ui.userFragment.UserFragmentViewModel_HiltModules_KeyModule_ProvideFactory;
 import dagger.hilt.android.ActivityRetainedLifecycle;
 import dagger.hilt.android.internal.builders.ActivityComponentBuilder;
 import dagger.hilt.android.internal.builders.ActivityRetainedComponentBuilder;
@@ -27,6 +38,9 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import javax.inject.Provider;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
 
 @DaggerGenerated
 @SuppressWarnings({
@@ -38,14 +52,43 @@ public final class DaggerApplication_HiltComponents_SingletonC extends Applicati
 
   private final DaggerApplication_HiltComponents_SingletonC singletonC = this;
 
+  private Provider<HttpLoggingInterceptor> providesHttpLoggingInterceptorProvider;
+
+  private Provider<OkHttpClient> providesOkHttpClientProvider;
+
+  private Provider<Retrofit> provideRetrofitProvider;
+
+  private Provider<Api> getRetrofitServiceInstanceProvider;
+
   private DaggerApplication_HiltComponents_SingletonC(
       ApplicationContextModule applicationContextModuleParam) {
     this.applicationContextModule = applicationContextModuleParam;
+    initialize(applicationContextModuleParam);
 
   }
 
   public static Builder builder() {
     return new Builder();
+  }
+
+  private OkHttpClient okHttpClient() {
+    return NetworkModule_ProvidesOkHttpClientFactory.providesOkHttpClient(providesHttpLoggingInterceptorProvider.get());
+  }
+
+  private Retrofit retrofit() {
+    return NetworkModule_ProvideRetrofitFactory.provideRetrofit(providesOkHttpClientProvider.get());
+  }
+
+  private Api api() {
+    return NetworkModule_GetRetrofitServiceInstanceFactory.getRetrofitServiceInstance(provideRetrofitProvider.get());
+  }
+
+  @SuppressWarnings("unchecked")
+  private void initialize(final ApplicationContextModule applicationContextModuleParam) {
+    this.providesHttpLoggingInterceptorProvider = DoubleCheck.provider(new SwitchingProvider<HttpLoggingInterceptor>(singletonC, 3));
+    this.providesOkHttpClientProvider = DoubleCheck.provider(new SwitchingProvider<OkHttpClient>(singletonC, 2));
+    this.provideRetrofitProvider = DoubleCheck.provider(new SwitchingProvider<Retrofit>(singletonC, 1));
+    this.getRetrofitServiceInstanceProvider = DoubleCheck.provider(new SwitchingProvider<Api>(singletonC, 0));
   }
 
   @Override
@@ -70,6 +113,15 @@ public final class DaggerApplication_HiltComponents_SingletonC extends Applicati
 
     public Builder applicationContextModule(ApplicationContextModule applicationContextModule) {
       this.applicationContextModule = Preconditions.checkNotNull(applicationContextModule);
+      return this;
+    }
+
+    /**
+     * @deprecated This module is declared, but an instance is not used in the component. This method is a no-op. For more, see https://dagger.dev/unused-modules.
+     */
+    @Deprecated
+    public Builder networkModule(NetworkModule networkModule) {
+      Preconditions.checkNotNull(networkModule);
       return this;
     }
 
@@ -345,13 +397,17 @@ public final class DaggerApplication_HiltComponents_SingletonC extends Applicati
     }
 
     @Override
+    public void injectMainActivity(MainActivity arg0) {
+    }
+
+    @Override
     public DefaultViewModelFactories.InternalFactoryFactory getHiltInternalFactoryFactory() {
-      return DefaultViewModelFactories_InternalFactoryFactory_Factory.newInstance(ApplicationContextModule_ProvideApplicationFactory.provideApplication(singletonC.applicationContextModule), Collections.<String>emptySet(), new ViewModelCBuilder(singletonC, activityRetainedCImpl));
+      return DefaultViewModelFactories_InternalFactoryFactory_Factory.newInstance(ApplicationContextModule_ProvideApplicationFactory.provideApplication(singletonC.applicationContextModule), getViewModelKeys(), new ViewModelCBuilder(singletonC, activityRetainedCImpl));
     }
 
     @Override
     public Set<String> getViewModelKeys() {
-      return Collections.<String>emptySet();
+      return Collections.<String>singleton(UserFragmentViewModel_HiltModules_KeyModule_ProvideFactory.provide());
     }
 
     @Override
@@ -377,17 +433,66 @@ public final class DaggerApplication_HiltComponents_SingletonC extends Applicati
 
     private final ViewModelCImpl viewModelCImpl = this;
 
+    private Provider<UserFragmentViewModel> userFragmentViewModelProvider;
+
     private ViewModelCImpl(DaggerApplication_HiltComponents_SingletonC singletonC,
         ActivityRetainedCImpl activityRetainedCImpl, SavedStateHandle savedStateHandleParam) {
       this.singletonC = singletonC;
       this.activityRetainedCImpl = activityRetainedCImpl;
 
+      initialize(savedStateHandleParam);
 
+    }
+
+    private ApiImpl apiImpl() {
+      return new ApiImpl(singletonC.getRetrofitServiceInstanceProvider.get());
+    }
+
+    private UserRepository userRepository() {
+      return new UserRepository(apiImpl());
+    }
+
+    private UserFragmentViewModel userFragmentViewModel() {
+      return new UserFragmentViewModel(userRepository());
+    }
+
+    @SuppressWarnings("unchecked")
+    private void initialize(final SavedStateHandle savedStateHandleParam) {
+      this.userFragmentViewModelProvider = new SwitchingProvider<>(singletonC, activityRetainedCImpl, viewModelCImpl, 0);
     }
 
     @Override
     public Map<String, Provider<ViewModel>> getHiltViewModelMap() {
-      return Collections.<String, Provider<ViewModel>>emptyMap();
+      return Collections.<String, Provider<ViewModel>>singletonMap("com.example.basedeneme.ui.userFragment.UserFragmentViewModel", (Provider) userFragmentViewModelProvider);
+    }
+
+    private static final class SwitchingProvider<T> implements Provider<T> {
+      private final DaggerApplication_HiltComponents_SingletonC singletonC;
+
+      private final ActivityRetainedCImpl activityRetainedCImpl;
+
+      private final ViewModelCImpl viewModelCImpl;
+
+      private final int id;
+
+      SwitchingProvider(DaggerApplication_HiltComponents_SingletonC singletonC,
+          ActivityRetainedCImpl activityRetainedCImpl, ViewModelCImpl viewModelCImpl, int id) {
+        this.singletonC = singletonC;
+        this.activityRetainedCImpl = activityRetainedCImpl;
+        this.viewModelCImpl = viewModelCImpl;
+        this.id = id;
+      }
+
+      @SuppressWarnings("unchecked")
+      @Override
+      public T get() {
+        switch (id) {
+          case 0: // com.example.basedeneme.ui.userFragment.UserFragmentViewModel 
+          return (T) viewModelCImpl.userFragmentViewModel();
+
+          default: throw new AssertionError(id);
+        }
+      }
     }
   }
 
@@ -458,6 +563,37 @@ public final class DaggerApplication_HiltComponents_SingletonC extends Applicati
       this.singletonC = singletonC;
 
 
+    }
+  }
+
+  private static final class SwitchingProvider<T> implements Provider<T> {
+    private final DaggerApplication_HiltComponents_SingletonC singletonC;
+
+    private final int id;
+
+    SwitchingProvider(DaggerApplication_HiltComponents_SingletonC singletonC, int id) {
+      this.singletonC = singletonC;
+      this.id = id;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public T get() {
+      switch (id) {
+        case 0: // com.example.basedeneme.services.Api 
+        return (T) singletonC.api();
+
+        case 1: // retrofit2.Retrofit 
+        return (T) singletonC.retrofit();
+
+        case 2: // okhttp3.OkHttpClient 
+        return (T) singletonC.okHttpClient();
+
+        case 3: // okhttp3.logging.HttpLoggingInterceptor 
+        return (T) NetworkModule_ProvidesHttpLoggingInterceptorFactory.providesHttpLoggingInterceptor();
+
+        default: throw new AssertionError(id);
+      }
     }
   }
 }

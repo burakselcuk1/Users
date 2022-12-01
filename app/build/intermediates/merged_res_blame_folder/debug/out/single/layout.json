@@ -2,5 +2,17 @@
     {
         "merged": "/Users/user/AndroidStudioProjects/Base-Struchture/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_main.xml",
         "source": "/Users/user/AndroidStudioProjects/Base-Struchture/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/user/AndroidStudioProjects/Base-Struchture/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_user.xml",
+        "source": "/Users/user/AndroidStudioProjects/Base-Struchture/app/src/main/res/layout/fragment_user.xml"
+    },
+    {
+        "merged": "/Users/user/AndroidStudioProjects/Base-Struchture/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_post.xml",
+        "source": "/Users/user/AndroidStudioProjects/Base-Struchture/app/src/main/res/layout/fragment_post.xml"
+    },
+    {
+        "merged": "/Users/user/AndroidStudioProjects/Base-Struchture/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/users_item.xml",
+        "source": "/Users/user/AndroidStudioProjects/Base-Struchture/app/src/main/res/layout/users_item.xml"
     }
 ]

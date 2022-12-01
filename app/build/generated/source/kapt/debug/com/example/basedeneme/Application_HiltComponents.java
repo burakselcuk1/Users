@@ -1,5 +1,8 @@
 package com.example.basedeneme;
 
+import com.example.basedeneme.di.NetworkModule;
+import com.example.basedeneme.ui.mainActivity.MainActivity_GeneratedInjector;
+import com.example.basedeneme.ui.userFragment.UserFragmentViewModel_HiltModules;
 import dagger.Binds;
 import dagger.Component;
 import dagger.Module;
@@ -114,7 +117,8 @@ public final class Application_HiltComponents {
       modules = {
           ApplicationContextModule.class,
           ActivityRetainedCBuilderModule.class,
-          ServiceCBuilderModule.class
+          ServiceCBuilderModule.class,
+          NetworkModule.class
       }
   )
   @Singleton
@@ -138,7 +142,8 @@ public final class Application_HiltComponents {
       modules = {
           ActivityCBuilderModule.class,
           ViewModelCBuilderModule.class,
-          HiltWrapper_ActivityRetainedComponentManager_LifecycleModule.class
+          HiltWrapper_ActivityRetainedComponentManager_LifecycleModule.class,
+          UserFragmentViewModel_HiltModules.KeyModule.class
       }
   )
   @ActivityRetainedScoped
@@ -160,7 +165,8 @@ public final class Application_HiltComponents {
       }
   )
   @ActivityScoped
-  public abstract static class ActivityC implements ActivityComponent,
+  public abstract static class ActivityC implements MainActivity_GeneratedInjector,
+      ActivityComponent,
       DefaultViewModelFactories.ActivityEntryPoint,
       HiltWrapper_HiltViewModelFactory_ActivityCreatorEntryPoint,
       FragmentComponentManager.FragmentComponentBuilderEntryPoint,
@@ -172,7 +178,10 @@ public final class Application_HiltComponents {
   }
 
   @Subcomponent(
-      modules = HiltWrapper_HiltViewModelFactory_ViewModelModule.class
+      modules = {
+          HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
+          UserFragmentViewModel_HiltModules.BindsModule.class
+      }
   )
   @ViewModelScoped
   public abstract static class ViewModelC implements ViewModelComponent,
