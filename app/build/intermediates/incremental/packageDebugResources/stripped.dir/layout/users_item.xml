@@ -6,19 +6,20 @@
     
                  
                                    
-                                                            
+                                                                    
            
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" android:tag="layout/users_item_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/thumbnail"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:tag="binding_1"      
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:tag="binding_1"                
+            android:tag="binding_2"                
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -40,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:tag="binding_2"                  
+            android:text="--"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"

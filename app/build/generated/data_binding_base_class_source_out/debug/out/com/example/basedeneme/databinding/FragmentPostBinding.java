@@ -4,17 +4,44 @@ package com.example.basedeneme.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.Bindable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import com.example.basedeneme.R;
+import com.example.basedeneme.model.PostsItemResponse;
 import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class FragmentPostBinding extends ViewDataBinding {
-  protected FragmentPostBinding(Object _bindingComponent, View _root, int _localFieldCount) {
+  @NonNull
+  public final TextView body;
+
+  @NonNull
+  public final ImageView postBackgroundImage;
+
+  @NonNull
+  public final TextView title;
+
+  @Bindable
+  protected PostsItemResponse mPostsInformation;
+
+  protected FragmentPostBinding(Object _bindingComponent, View _root, int _localFieldCount,
+      TextView body, ImageView postBackgroundImage, TextView title) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.body = body;
+    this.postBackgroundImage = postBackgroundImage;
+    this.title = title;
+  }
+
+  public abstract void setPostsInformation(@Nullable PostsItemResponse postsInformation);
+
+  @Nullable
+  public PostsItemResponse getPostsInformation() {
+    return mPostsInformation;
   }
 
   @NonNull

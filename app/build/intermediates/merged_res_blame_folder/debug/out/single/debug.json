@@ -8,6 +8,10 @@
         "source": "/Users/user/AndroidStudioProjects/Base-Struchture/app/src/main/res/mipmap-mdpi/ic_launcher.webp"
     },
     {
+        "merged": "/Users/user/AndroidStudioProjects/Base-Struchture/app/build/intermediates/merged_res/debug/layout_progress_dialog_view.xml.flat",
+        "source": "/Users/user/AndroidStudioProjects/Base-Struchture/app/src/main/res/layout/progress_dialog_view.xml"
+    },
+    {
         "merged": "/Users/user/AndroidStudioProjects/Base-Struchture/app/build/intermediates/merged_res/debug/mipmap-hdpi_ic_launcher_round.webp.flat",
         "source": "/Users/user/AndroidStudioProjects/Base-Struchture/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp"
     },

@@ -16,6 +16,8 @@ import com.example.basedeneme.repository.UserRepository;
 import com.example.basedeneme.services.Api;
 import com.example.basedeneme.services.ApiImpl;
 import com.example.basedeneme.ui.mainActivity.MainActivity;
+import com.example.basedeneme.ui.postFragment.PostFragmentViewModel;
+import com.example.basedeneme.ui.postFragment.PostFragmentViewModel_HiltModules_KeyModule_ProvideFactory;
 import com.example.basedeneme.ui.userFragment.UserFragmentViewModel;
 import com.example.basedeneme.ui.userFragment.UserFragmentViewModel_HiltModules_KeyModule_ProvideFactory;
 import dagger.hilt.android.ActivityRetainedLifecycle;
@@ -33,8 +35,9 @@ import dagger.hilt.android.internal.modules.ApplicationContextModule;
 import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideApplicationFactory;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.DoubleCheck;
+import dagger.internal.MapBuilder;
 import dagger.internal.Preconditions;
-import java.util.Collections;
+import dagger.internal.SetBuilder;
 import java.util.Map;
 import java.util.Set;
 import javax.inject.Provider;
@@ -407,7 +410,7 @@ public final class DaggerApplication_HiltComponents_SingletonC extends Applicati
 
     @Override
     public Set<String> getViewModelKeys() {
-      return Collections.<String>singleton(UserFragmentViewModel_HiltModules_KeyModule_ProvideFactory.provide());
+      return SetBuilder.<String>newSetBuilder(2).add(PostFragmentViewModel_HiltModules_KeyModule_ProvideFactory.provide()).add(UserFragmentViewModel_HiltModules_KeyModule_ProvideFactory.provide()).build();
     }
 
     @Override
@@ -433,6 +436,8 @@ public final class DaggerApplication_HiltComponents_SingletonC extends Applicati
 
     private final ViewModelCImpl viewModelCImpl = this;
 
+    private Provider<PostFragmentViewModel> postFragmentViewModelProvider;
+
     private Provider<UserFragmentViewModel> userFragmentViewModelProvider;
 
     private ViewModelCImpl(DaggerApplication_HiltComponents_SingletonC singletonC,
@@ -452,18 +457,23 @@ public final class DaggerApplication_HiltComponents_SingletonC extends Applicati
       return new UserRepository(apiImpl());
     }
 
+    private PostFragmentViewModel postFragmentViewModel() {
+      return new PostFragmentViewModel(userRepository());
+    }
+
     private UserFragmentViewModel userFragmentViewModel() {
       return new UserFragmentViewModel(userRepository());
     }
 
     @SuppressWarnings("unchecked")
     private void initialize(final SavedStateHandle savedStateHandleParam) {
-      this.userFragmentViewModelProvider = new SwitchingProvider<>(singletonC, activityRetainedCImpl, viewModelCImpl, 0);
+      this.postFragmentViewModelProvider = new SwitchingProvider<>(singletonC, activityRetainedCImpl, viewModelCImpl, 0);
+      this.userFragmentViewModelProvider = new SwitchingProvider<>(singletonC, activityRetainedCImpl, viewModelCImpl, 1);
     }
 
     @Override
     public Map<String, Provider<ViewModel>> getHiltViewModelMap() {
-      return Collections.<String, Provider<ViewModel>>singletonMap("com.example.basedeneme.ui.userFragment.UserFragmentViewModel", (Provider) userFragmentViewModelProvider);
+      return MapBuilder.<String, Provider<ViewModel>>newMapBuilder(2).put("com.example.basedeneme.ui.postFragment.PostFragmentViewModel", (Provider) postFragmentViewModelProvider).put("com.example.basedeneme.ui.userFragment.UserFragmentViewModel", (Provider) userFragmentViewModelProvider).build();
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {
@@ -487,7 +497,10 @@ public final class DaggerApplication_HiltComponents_SingletonC extends Applicati
       @Override
       public T get() {
         switch (id) {
-          case 0: // com.example.basedeneme.ui.userFragment.UserFragmentViewModel 
+          case 0: // com.example.basedeneme.ui.postFragment.PostFragmentViewModel 
+          return (T) viewModelCImpl.postFragmentViewModel();
+
+          case 1: // com.example.basedeneme.ui.userFragment.UserFragmentViewModel 
           return (T) viewModelCImpl.userFragmentViewModel();
 
           default: throw new AssertionError(id);

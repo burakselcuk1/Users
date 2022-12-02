@@ -13,7 +13,8 @@ public class FragmentPostBindingImpl extends FragmentPostBinding  {
     private static final android.util.SparseIntArray sViewsWithIds;
     static {
         sIncludes = null;
-        sViewsWithIds = null;
+        sViewsWithIds = new android.util.SparseIntArray();
+        sViewsWithIds.put(R.id.post_background_image, 3);
     }
     // views
     @NonNull
@@ -24,13 +25,18 @@ public class FragmentPostBindingImpl extends FragmentPostBinding  {
     // Inverse Binding Event Handlers
 
     public FragmentPostBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 1, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 4, sIncludes, sViewsWithIds));
     }
     private FragmentPostBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
+            , (android.widget.TextView) bindings[2]
+            , (android.widget.ImageView) bindings[3]
+            , (android.widget.TextView) bindings[1]
             );
+        this.body.setTag(null);
         this.mboundView0 = (androidx.constraintlayout.widget.ConstraintLayout) bindings[0];
         this.mboundView0.setTag(null);
+        this.title.setTag(null);
         setRootTag(root);
         // listeners
         invalidateAll();
@@ -39,7 +45,7 @@ public class FragmentPostBindingImpl extends FragmentPostBinding  {
     @Override
     public void invalidateAll() {
         synchronized(this) {
-                mDirtyFlags = 0x1L;
+                mDirtyFlags = 0x2L;
         }
         requestRebind();
     }
@@ -57,7 +63,22 @@ public class FragmentPostBindingImpl extends FragmentPostBinding  {
     @Override
     public boolean setVariable(int variableId, @Nullable Object variable)  {
         boolean variableSet = true;
+        if (BR.postsInformation == variableId) {
+            setPostsInformation((com.example.basedeneme.model.PostsItemResponse) variable);
+        }
+        else {
+            variableSet = false;
+        }
             return variableSet;
+    }
+
+    public void setPostsInformation(@Nullable com.example.basedeneme.model.PostsItemResponse PostsInformation) {
+        this.mPostsInformation = PostsInformation;
+        synchronized(this) {
+            mDirtyFlags |= 0x1L;
+        }
+        notifyPropertyChanged(BR.postsInformation);
+        super.requestRebind();
     }
 
     @Override
@@ -74,14 +95,36 @@ public class FragmentPostBindingImpl extends FragmentPostBinding  {
             dirtyFlags = mDirtyFlags;
             mDirtyFlags = 0;
         }
+        com.example.basedeneme.model.PostsItemResponse postsInformation = mPostsInformation;
+        java.lang.String postsInformationBody = null;
+        java.lang.String postsInformationTitle = null;
+
+        if ((dirtyFlags & 0x3L) != 0) {
+
+
+
+                if (postsInformation != null) {
+                    // read postsInformation.body
+                    postsInformationBody = postsInformation.getBody();
+                    // read postsInformation.title
+                    postsInformationTitle = postsInformation.getTitle();
+                }
+        }
         // batch finished
+        if ((dirtyFlags & 0x3L) != 0) {
+            // api target 1
+
+            androidx.databinding.adapters.TextViewBindingAdapter.setText(this.body, postsInformationBody);
+            androidx.databinding.adapters.TextViewBindingAdapter.setText(this.title, postsInformationTitle);
+        }
     }
     // Listener Stub Implementations
     // callback impls
     // dirty flag
     private  long mDirtyFlags = 0xffffffffffffffffL;
     /* flag mapping
-        flag 0 (0x1L): null
+        flag 0 (0x1L): postsInformation
+        flag 1 (0x2L): null
     flag mapping end*/
     //end
 }

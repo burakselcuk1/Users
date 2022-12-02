@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/basedeneme.iml" filepath="$PROJECT_DIR$/.idea/modules/basedeneme.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/basedeneme.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/basedeneme.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/basedeneme.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/basedeneme.app.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/basedeneme.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/basedeneme.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/basedeneme.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/basedeneme.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/burakselcuk.iml" filepath="$PROJECT_DIR$/.idea/modules/burakselcuk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/burakselcuk.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/burakselcuk.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/burakselcuk.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/burakselcuk.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/burakselcuk.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/burakselcuk.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/burakselcuk.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/burakselcuk.app.unitTest.iml" />
     </modules>
   </component>
 </project>

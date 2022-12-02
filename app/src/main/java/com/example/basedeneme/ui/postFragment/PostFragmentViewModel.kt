@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.example.basedeneme.base.BaseViewModel
 import com.example.basedeneme.common.enums.Status
 import com.example.basedeneme.model.PostsItemResponse
-import com.example.basedeneme.model.PostsResponse
-import com.example.basedeneme.model.UsersResponse
 import com.example.basedeneme.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.GlobalScope

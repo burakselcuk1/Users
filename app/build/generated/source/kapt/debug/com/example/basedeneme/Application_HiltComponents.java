@@ -2,6 +2,7 @@ package com.example.basedeneme;
 
 import com.example.basedeneme.di.NetworkModule;
 import com.example.basedeneme.ui.mainActivity.MainActivity_GeneratedInjector;
+import com.example.basedeneme.ui.postFragment.PostFragmentViewModel_HiltModules;
 import com.example.basedeneme.ui.userFragment.UserFragmentViewModel_HiltModules;
 import dagger.Binds;
 import dagger.Component;
@@ -143,6 +144,7 @@ public final class Application_HiltComponents {
           ActivityCBuilderModule.class,
           ViewModelCBuilderModule.class,
           HiltWrapper_ActivityRetainedComponentManager_LifecycleModule.class,
+          PostFragmentViewModel_HiltModules.KeyModule.class,
           UserFragmentViewModel_HiltModules.KeyModule.class
       }
   )
@@ -180,6 +182,7 @@ public final class Application_HiltComponents {
   @Subcomponent(
       modules = {
           HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
+          PostFragmentViewModel_HiltModules.BindsModule.class,
           UserFragmentViewModel_HiltModules.BindsModule.class
       }
   )

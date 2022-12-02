@@ -14,5 +14,9 @@
     {
         "merged": "/Users/user/AndroidStudioProjects/Base-Struchture/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/users_item.xml",
         "source": "/Users/user/AndroidStudioProjects/Base-Struchture/app/src/main/res/layout/users_item.xml"
+    },
+    {
+        "merged": "/Users/user/AndroidStudioProjects/Base-Struchture/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/progress_dialog_view.xml",
+        "source": "/Users/user/AndroidStudioProjects/Base-Struchture/app/src/main/res/layout/progress_dialog_view.xml"
     }
 ]

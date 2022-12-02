@@ -4,6 +4,7 @@ package com.example.basedeneme.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,8 +12,7 @@ import androidx.databinding.Bindable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import com.example.basedeneme.R;
-import com.example.basedeneme.model.UsersItem;
-import de.hdodenhof.circleimageview.CircleImageView;
+import com.example.basedeneme.model.UsersItemResponse;
 import java.lang.Deprecated;
 import java.lang.Object;
 
@@ -24,23 +24,23 @@ public abstract class UsersItemBinding extends ViewDataBinding {
   public final TextView name;
 
   @NonNull
-  public final CircleImageView thumbnail;
+  public final ImageView thumbnail;
 
   @Bindable
-  protected UsersItem mUsersInformation;
+  protected UsersItemResponse mUsersInformation;
 
   protected UsersItemBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      TextView count, TextView name, CircleImageView thumbnail) {
+      TextView count, TextView name, ImageView thumbnail) {
     super(_bindingComponent, _root, _localFieldCount);
     this.count = count;
     this.name = name;
     this.thumbnail = thumbnail;
   }
 
-  public abstract void setUsersInformation(@Nullable UsersItem usersInformation);
+  public abstract void setUsersInformation(@Nullable UsersItemResponse usersInformation);
 
   @Nullable
-  public UsersItem getUsersInformation() {
+  public UsersItemResponse getUsersInformation() {
     return mUsersInformation;
   }
 

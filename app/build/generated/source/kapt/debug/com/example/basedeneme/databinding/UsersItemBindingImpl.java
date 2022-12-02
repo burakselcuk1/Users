@@ -14,7 +14,7 @@ public class UsersItemBindingImpl extends UsersItemBinding  {
     static {
         sIncludes = null;
         sViewsWithIds = new android.util.SparseIntArray();
-        sViewsWithIds.put(R.id.thumbnail, 3);
+        sViewsWithIds.put(R.id.count, 3);
     }
     // views
     @NonNull
@@ -29,14 +29,14 @@ public class UsersItemBindingImpl extends UsersItemBinding  {
     }
     private UsersItemBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
+            , (android.widget.TextView) bindings[3]
             , (android.widget.TextView) bindings[2]
-            , (android.widget.TextView) bindings[1]
-            , (de.hdodenhof.circleimageview.CircleImageView) bindings[3]
+            , (android.widget.ImageView) bindings[1]
             );
-        this.count.setTag(null);
         this.mboundView0 = (androidx.constraintlayout.widget.ConstraintLayout) bindings[0];
         this.mboundView0.setTag(null);
         this.name.setTag(null);
+        this.thumbnail.setTag(null);
         setRootTag(root);
         // listeners
         invalidateAll();
@@ -64,7 +64,7 @@ public class UsersItemBindingImpl extends UsersItemBinding  {
     public boolean setVariable(int variableId, @Nullable Object variable)  {
         boolean variableSet = true;
         if (BR.usersInformation == variableId) {
-            setUsersInformation((com.example.basedeneme.model.UsersItem) variable);
+            setUsersInformation((com.example.basedeneme.model.UsersItemResponse) variable);
         }
         else {
             variableSet = false;
@@ -72,7 +72,7 @@ public class UsersItemBindingImpl extends UsersItemBinding  {
             return variableSet;
     }
 
-    public void setUsersInformation(@Nullable com.example.basedeneme.model.UsersItem UsersInformation) {
+    public void setUsersInformation(@Nullable com.example.basedeneme.model.UsersItemResponse UsersInformation) {
         this.mUsersInformation = UsersInformation;
         synchronized(this) {
             mDirtyFlags |= 0x1L;
@@ -95,27 +95,27 @@ public class UsersItemBindingImpl extends UsersItemBinding  {
             dirtyFlags = mDirtyFlags;
             mDirtyFlags = 0;
         }
+        java.lang.String usersInformationUrl = null;
         java.lang.String usersInformationName = null;
-        int usersInformationUserId = 0;
-        com.example.basedeneme.model.UsersItem usersInformation = mUsersInformation;
+        com.example.basedeneme.model.UsersItemResponse usersInformation = mUsersInformation;
 
         if ((dirtyFlags & 0x3L) != 0) {
 
 
 
                 if (usersInformation != null) {
+                    // read usersInformation.url
+                    usersInformationUrl = usersInformation.getUrl();
                     // read usersInformation.name
                     usersInformationName = usersInformation.getName();
-                    // read usersInformation.userId
-                    usersInformationUserId = usersInformation.getUserId();
                 }
         }
         // batch finished
         if ((dirtyFlags & 0x3L) != 0) {
             // api target 1
 
-            this.count.setText(usersInformationUserId);
             androidx.databinding.adapters.TextViewBindingAdapter.setText(this.name, usersInformationName);
+            com.example.basedeneme.adapter.ImageAdapterKt.loadImage(this.thumbnail, usersInformationUrl);
         }
     }
     // Listener Stub Implementations
