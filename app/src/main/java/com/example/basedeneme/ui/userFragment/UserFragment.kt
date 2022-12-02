@@ -11,6 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.basedeneme.R
 import com.example.basedeneme.adapter.UserAdapter
 import com.example.basedeneme.base.BaseFragment
+import com.example.basedeneme.common.enums.Status
+import com.example.basedeneme.common.extensions.observe
+import com.example.basedeneme.common.extensions.observeEvent
+import com.example.basedeneme.common.tryOrLog
+import com.example.basedeneme.common.utils.ProgressDialogUtil
 import com.example.basedeneme.databinding.FragmentUserBinding
 import com.example.basedeneme.utils.DataFetchResult
 
@@ -23,7 +28,8 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserFragmentViewModel>(
     private lateinit var adapter: UserAdapter
 
     override fun onInitDataBinding() {
-        getUsers()
+        //getUsers()
+        getUserse()
     }
 
     fun getUsers(){
@@ -33,5 +39,36 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserFragmentViewModel>(
             binding.userRecyclerview.layoutManager = LinearLayoutManager(context)
             binding.userRecyclerview.adapter = adapter
         })
+
+    }
+
+    fun getUserse(){
+        observeEvent(viewModel.statusData) {
+            tryOrLog {
+                when (it) {
+                    Status.LOADING -> {
+                        ProgressDialogUtil.showLoadingProgress(context = requireContext())
+                        ProgressDialogUtil.start()
+                    }
+                    Status.SUCCESS -> {
+
+                        binding.progressBar.visibility = View.GONE
+
+                        observe(viewModel.users){
+
+                            adapter = UserAdapter(it)
+                            binding.userRecyclerview.layoutManager = LinearLayoutManager(context)
+                            binding.userRecyclerview.adapter = adapter
+
+                        }
+
+                        ProgressDialogUtil.stop()
+                    }
+                    Status.ERROR -> {
+                        ProgressDialogUtil.stop()
+                    }
+                }
+            }
+        }
     }
 }

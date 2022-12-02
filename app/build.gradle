@@ -53,7 +53,7 @@ dependencies {
     def retrofit_version ="2.9.0"
     def hilt_version = "2.38.1"
     def gsonVersion = '2.8.6'
-
+    def lottieVersion = "3.2.0"
 
     //Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
@@ -99,5 +99,7 @@ dependencies {
 
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
 
+    //ui
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 
 }
