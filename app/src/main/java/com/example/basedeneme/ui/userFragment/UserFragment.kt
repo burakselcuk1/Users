@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.basedeneme.R
@@ -21,29 +22,16 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserFragmentViewModel>(
 
     private lateinit var adapter: UserAdapter
 
-
     override fun onInitDataBinding() {
         getUsers()
     }
 
     fun getUsers(){
         viewModel.users.observe(viewLifecycleOwner, Observer {
-
-            when (it) {
-                is DataFetchResult.Progress -> {
-                    it.loading
-                    binding.progressBar.visibility = View.VISIBLE
-                }
-                is DataFetchResult.Failure -> {
-                    it.e
-                }
-                is DataFetchResult.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    adapter = UserAdapter(it.data)
-                    binding.userRecyclerview.layoutManager = LinearLayoutManager(context)
-                    binding.userRecyclerview.adapter = adapter
-                }
-            }
+            binding.progressBar.visibility = View.GONE
+            adapter = UserAdapter(it)
+            binding.userRecyclerview.layoutManager = LinearLayoutManager(context)
+            binding.userRecyclerview.adapter = adapter
         })
     }
 }

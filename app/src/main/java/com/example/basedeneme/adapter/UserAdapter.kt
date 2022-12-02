@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basedeneme.databinding.UsersItemBinding
-import com.example.basedeneme.model.Users
-import com.example.basedeneme.model.UsersItem
+import com.example.basedeneme.model.UsersItemResponse
+import com.example.basedeneme.model.UsersResponse
 
 
-class UserAdapter(private val dataSet: Users) :
+class UserAdapter(private val dataSet: UsersResponse) :
     RecyclerView.Adapter<UserAdapter.ViewHolder>() {
     private lateinit var binding: UsersItemBinding
 
@@ -24,14 +24,14 @@ class UserAdapter(private val dataSet: Users) :
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-
-        binding.usersInformation = dataSet.results[position]
+        val usersResponse: UsersItemResponse = dataSet.get(position)
+        binding.usersInformation = usersResponse
 
         /*val url = POSTER_MAIN_URL + dataSet[position].poster_path
         viewHolder.itemView.apply {
             Glide.with(this).load(url).into(viewHolder.itemView.movieImage)
         }*/
     }
-    override fun getItemCount() = dataSet.results.size
+    override fun getItemCount() = dataSet.size
 
 }

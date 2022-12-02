@@ -7,5 +7,6 @@ import javax.inject.Inject
 class UserRepository @Inject constructor(private val usersApiImple: ApiImpl) {
 
     suspend fun getUsers() = usersApiImple.getUsers()
+    suspend fun getPosts(id: Int) = usersApiImple.getPosts(id)
 
 }

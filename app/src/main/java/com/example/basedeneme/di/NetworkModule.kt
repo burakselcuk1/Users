@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.basedeneme.BuildConfig
 import com.example.basedeneme.services.Api
 import com.example.basedeneme.utils.Constans.Companion.BASE_URL
+import com.google.gson.Gson
 
 
 import dagger.Module
@@ -65,4 +66,11 @@ object NetworkModule {
         .baseUrl(BASE_URL)
         .client(okHttpClient)
         .build()
+
+
+    @Provides
+    @Singleton
+    fun provideGson() = Gson()
+
+
 }

@@ -1,10 +1,11 @@
 package com.example.basedeneme.model
 
 
-data class UsersItem(
+
+data class UsersItemResponse(
     val albumId: Int,
-    val name: String,
+    var name: String?,
     val thumbnailUrl: String,
     val url: String,
-    val userId: Int
-):java.io.Serializable
+    val userId: Int?
+)

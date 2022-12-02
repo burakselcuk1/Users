@@ -3,7 +3,7 @@ package com.example.basedeneme.model
 import com.google.gson.annotations.SerializedName
 
 
-data class PostsItem(
+data class PostsItemResponse(
     val body: String,
     @SerializedName("id")
     val id: Int,

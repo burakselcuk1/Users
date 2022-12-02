@@ -6,7 +6,7 @@
     <data>
         <variable
             name="usersInformation"
-            type="com.example.basedeneme.model.UsersItem" />
+            type="com.example.basedeneme.model.UsersItemResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="@{usersInformation.userId}"
+            android:text="--"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
