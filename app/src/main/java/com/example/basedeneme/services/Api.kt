@@ -1,13 +1,11 @@
 package com.example.basedeneme.services
 
 import com.example.basedeneme.model.PostsItemResponse
-import com.example.basedeneme.model.PostsResponse
 import com.example.basedeneme.model.UsersResponse
 import retrofit2.Response
 
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface Api {
 
