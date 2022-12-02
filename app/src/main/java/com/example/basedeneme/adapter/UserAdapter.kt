@@ -1,8 +1,12 @@
 package com.example.basedeneme.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.basedeneme.R
 import com.example.basedeneme.databinding.UsersItemBinding
 import com.example.basedeneme.model.UsersItemResponse
 import com.example.basedeneme.model.UsersResponse
@@ -27,10 +31,15 @@ class UserAdapter(private val dataSet: UsersResponse) :
         val usersResponse: UsersItemResponse = dataSet.get(position)
         binding.usersInformation = usersResponse
 
-        /*val url = POSTER_MAIN_URL + dataSet[position].poster_path
-        viewHolder.itemView.apply {
-            Glide.with(this).load(url).into(viewHolder.itemView.movieImage)
-        }*/
+        viewHolder.itemView.setOnClickListener {
+
+            val bundle = Bundle()
+            bundle.putSerializable("userId",""+dataSet.get(position).userId)
+            bundle.putSerializable("userUrl",""+dataSet.get(position).url)
+
+            val navigationController = Navigation.findNavController(viewHolder.itemView)
+            navigationController.navigate(R.id.action_userFragment_to_postFragment,bundle!!)
+        }
     }
     override fun getItemCount() = dataSet.size
 

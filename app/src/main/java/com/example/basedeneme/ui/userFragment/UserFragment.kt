@@ -17,7 +17,6 @@ import com.example.basedeneme.common.extensions.observeEvent
 import com.example.basedeneme.common.tryOrLog
 import com.example.basedeneme.common.utils.ProgressDialogUtil
 import com.example.basedeneme.databinding.FragmentUserBinding
-import com.example.basedeneme.utils.DataFetchResult
 
 
 class UserFragment : BaseFragment<FragmentUserBinding, UserFragmentViewModel>(

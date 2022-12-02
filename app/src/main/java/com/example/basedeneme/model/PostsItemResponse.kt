@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 
 data class PostsItemResponse(
-    val body: String,
+    var body: String,
     @SerializedName("id")
     val id: Int,
     val title: String,

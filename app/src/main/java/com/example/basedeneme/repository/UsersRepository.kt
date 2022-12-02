@@ -8,6 +8,6 @@ import javax.inject.Inject
 class UserRepository @Inject constructor(private val usersApiImple: ApiImpl) {
 
     suspend fun getUsers() =  handleRequestFlow { usersApiImple.getUsers() }
-    suspend fun getPosts(id: Int) = usersApiImple.getPosts(id)
+    suspend fun getPosts(id: Int) = handleRequestFlow {usersApiImple.getPosts(id)}
 
 }

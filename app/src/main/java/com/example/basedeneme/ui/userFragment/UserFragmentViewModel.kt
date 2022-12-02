@@ -23,16 +23,10 @@ class UserFragmentViewModel @Inject constructor(private val repository: UserRepo
     val statusData: LiveData<Status> = _statusData
 
     init {
-        getUsers1()
+        getUsers()
     }
 
-    fun getUsers()=GlobalScope.launch {
-        repository.getUsers().let {
-           // _users.postValue( it.body()!! )
-        }
-    }
-
-    fun getUsers1() {
+    fun getUsers() {
 
         GlobalScope.launch {
             repository.getUsers()
@@ -40,7 +34,6 @@ class UserFragmentViewModel @Inject constructor(private val repository: UserRepo
                     _statusData.postValue(Status.ERROR)
                 }
                 .collect {
-
                     when (it.status) {
                         Status.LOADING -> {
                             _statusData.postValue(Status.LOADING)
@@ -55,8 +48,6 @@ class UserFragmentViewModel @Inject constructor(private val repository: UserRepo
                     }
 
                 }
-
-
         }
     }
 }
